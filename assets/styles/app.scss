@@ -1,0 +1,12 @@
+body {
+    background-color: lightgray;
+}
+header{
+    margin-bottom: 50px;
+}
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.list-group-item{
+    background-color: transparent;
+}

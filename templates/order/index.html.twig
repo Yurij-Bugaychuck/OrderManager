@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrderManager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="bg-light nav nav-pills mb-3" id="orders-tab" role="tablist">
+                   
+
+                    {% for orders in ordersList %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link border-end {%if loop.index == 1%}active{%endif%}" 
+                            id="orders-t-{{loop.index}}" data-bs-toggle="pill" 
+                            data-bs-target="#orders-{{loop.index}}" type="button" role="tab" aria-controls="orders-{{loop.index}}" aria-selected="false">
+                            {{orders.Name}} <span class="badge  {%if orders.count > 0%} bg-success{%else%}bg-secondary{%endif%}">{{orders.count}}</span>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-content">
+            {% for orders in ordersList %}
+            <div class="tab-pane fade {%if loop.index == 1%}show active{%endif%}" id="orders-{{loop.index}}">
+            {% set lopi = loop.index %}
+                {% for order in orders.orders %}
+                    {{ include('order/templates/order.template.html.twig', {order: order, tabId: lopi}) }}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="tab-pane fade" id="orders-inwork">
+                inwork
+            </div>
+        </div>
+        
+        
+    </div>
+{% endblock %}
+

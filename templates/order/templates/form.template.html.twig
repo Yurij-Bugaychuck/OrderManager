@@ -1,0 +1,101 @@
+<form class="form-floating" action="{{form.action}}" method="{{form.method}}">
+	{% if form._method != "NONE" %}
+	<input type='hidden' name='_method' value='{{form._method}}'>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control" name="clientName" id="clname" placeholder="placeholder" value="{{templateValues.clientName}}">
+				<label for="clname">
+					<i class="bi bi-person-circle"></i>
+					ФИО</label>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-floating mb-3">
+						<input type="phone" class="form-control" value="{{templateValues.clientPhone}}" name="clientPhone" id="floatingInput2" placeholder="placeholder">
+						<label for="floatingInput2">
+							<i class="bi bi-phone"></i>
+							Номер телефона</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" value="{{templateValues.clientInstagram}}" name="clientInstagram" id="inst" placeholder="placeholder">
+						<label for="inst">
+							<i class="bi bi-instagram"></i>
+							Instagram</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<div class="form-floating mb-3">
+						<input type="number" class="form-control" value="{{templateValues.clientPaid}}" name="clientPaid" id="paid" placeholder="placeholder">
+						<label for="paid">
+							<i class="bi bi-cash"></i>
+							Предоплата</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating mb-3">
+						<input type="number" class="form-control" value="{{templateValues.orderPrice}}" name="orderPrice" id="price" placeholder="placeholder">
+						<label for="price">
+							<i class="bi bi-cash"></i>
+							Стоимость</label>
+					</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<div class="form-floating">
+						<select class="form-select" name="orderStatus" id="orderstatus" aria-label="Floating label select example">
+							{% for status in statuses %}
+								<option value="{{status.id}}" {% if templateValues.orderStatus is defined and status.id == templateValues.orderStatus %}selected{% endif %}>{{status.name}}</option>
+							{% endfor %}
+						</select>
+						<label for="orderstatus">Статус заказа</label>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+
+					<input type="date" name="orderdate" value="{{templateValues.orderdate}}" class="form-control" id="orderdate" placeholder="placeholder">
+
+				</div>
+
+				<div class="col-md-6 text-right d-flex justify-content-end">
+					<div class="btn-group" role="group" aria-label="Basic radio toggle button group text-right">
+						<input type="radio" class="btn-check" name="shipping" id="btnradio1" value="0" autocomplete="off" {% if templateValues.shipping is defined and templateValues.shipping == 0 %}checked{% endif %}>
+						<label class="btn btn-outline-primary" for="btnradio1">Укр почта</label>
+
+						<input type="radio" class="btn-check" name="shipping" id="btnradio2" value="1" autocomplete="off" {% if templateValues.shipping is defined and templateValues.shipping == 1 %}checked{% endif %}>
+						<label class="btn btn-outline-primary" for="btnradio2">Новая почта</label>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-floating mb-3">
+				<textarea class="form-control"  placeholder="Leave a comment here" name="order" id="order" style="height: 100px">{{templateValues.order}}</textarea>
+				<label for="order">Заказ</label>
+			</div>
+			<div class="form-floating mb-3">
+				<textarea class="form-control" name="notes" placeholder="Leave a comment here" id="notes" style="height: 100px">{{templateValues.notes}}</textarea>
+				<label for="notes">Комментарий к заказу</label>
+			</div>
+
+
+			<div class="form-floating mb-3">
+				<textarea class="form-control" placeholder="Leave a comment here" name="shippingDetails" id="shippingdetails" style="height: 100px">{{templateValues.shippingDetails}}</textarea>
+				<label for="order">Данные для доставки</label>
+			</div>
+
+
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</div>
+</form>

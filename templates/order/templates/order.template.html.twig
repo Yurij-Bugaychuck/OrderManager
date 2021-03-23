@@ -1,0 +1,120 @@
+
+{% set shipping = 'Новая почта'%}
+
+{% if order.shipping == 1 %}
+{% set shipping = 'Укр почта' %}
+{% endif %}
+
+{% set shipping = 'Новая почта'%}
+
+{% if order.orderStatusId == 1 %}
+{% set statusBG = 'bg-warning' %}
+{% endif %}
+
+{% if order.orderStatusId == 2 %}
+{% set statusBG = 'bg-info' %}
+{% endif %}
+
+{% if order.orderStatusId == 3 %}
+{% set statusBG = 'bg-primary' %}
+{% endif %}
+
+{% if order.orderStatusId == 4 %}
+{% set statusBG = 'bg-success' %}
+{% endif %}
+
+{% if order.orderStatusId == 5 %}
+{% set orderStatusId = 'bg-danger' %}
+{% endif %}
+
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="ms-2 text-dark text-wrap fs-4 me-2 pe-2 border-end">#{{order.id}}</div>
+                        <div class="d-inline-block text-left">
+                            <h5 class="card-title mb-1 text-reset"> {{order.clientName}} </h5>
+                        
+                            <a class="link-primary" href="https://www.instagram.com/{{order.instagram}}/" target="_blank">
+                            <i class="bi bi-link"></i> {{order.instagram}}
+                            </a>
+                            
+                        </div>
+                        <div class="ms-2 badge bg-success text-wrap fs-6">{{order.paid}} грн.</div>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                        
+                        <div class="badge {{statusBG}} text-wrap fs-6 me-2">{{order.orderStatus}}</div>
+                        <div class="badge bg-info text-wrap text-white fs-6">{{order.createdAt}}</div>
+                        <div class="btn-group ms-2" role="group">
+                            <a href="/order/success/{{order.id}}" type="button" class="configureButton btn btn-success" label="Заказ выполнен"><i class="bi bi-bookmark-check"></i></a>
+                            <a href="/order/ttn/{{order.id}}" type="button" class="configureButton btn btn-warning text-light" label="Доставка" ><i class="bi bi-truck"></i></a>
+                            <a href="/order/update/{{order.id}}" type="button" class="configureButton update-btn btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                            <a href="/order/delete/{{order.id}}" type="button" class="btn btn-danger"><i class="configureButton delete-btn bi bi-trash-fill"></i></a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="card-opener mb-2 mt-2 text-center">
+            <a class="text-underline text-secondary" data-bs-toggle="collapse" href="#order-{{tabId}}-{{order.id}}" role="button" aria-expanded="false" aria-controls="order-{{order.id}}">Больше...</a>
+        </div>
+        <div class="collapse" id="order-{{tabId}}-{{order.id}}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-dark bg-light mb-3">
+                            <div class="card-header">Заказ:</div>
+                            <div class="card-body">
+                                <p class="card-text">{{order.order}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <div>Предоплата: <div class="badge bg-success text-wrap">{{order.paid}} грн.</div></div>
+                                <div>Наложенный платеж: <div class="badge bg-warning text-wrap">{{order.price - order.paid}} грн.</div></div>
+                                <div>Сумма заказа: <div class="badge text-wrap mb-0 text-dark">{{order.price}} грн.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card text-dark bg-light mb-3">
+                            <div class="card-header">Данные клиента:</div>
+                            <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b><i class="bi bi-person-circle"></i></b> {{order.clientName}}</li>
+                                    <li class="list-group-item"><b><i class="bi bi-instagram"></i></b> {{order.instagram}}</li>
+                                    <li class="list-group-item"><b><i class="bi bi-telephone"></i></b> {{order.clientPhone}}</li>
+                                </ul>
+                                <hr>
+                                <p class="text-center mb-1 fw-bold">Данные заказа</p>
+                                    <p class="mb-0">
+                                        {{order.shippingDetails}}
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-dark bg-light mb-3">
+                            <div class="card-header">Статус заказа:</div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Статус:</b> <div class="badge {{statusBG}} text-wrap">{{order.orderStatus}}</div></li>
+                                    <li class="list-group-item"><b>Доставка:</b> {{shipping}}</li>
+                                    <li class="list-group-item"><b>ТТН</b>: {{order.ttn}}</b> </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Заметки:</small>
+                <p class="mb-0">Отправка за наш счёт</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
